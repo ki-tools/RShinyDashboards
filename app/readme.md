@@ -1,0 +1,1 @@
+A simple example of [`shiny`](https://github.com/rstudio/shiny) and [`shinydashboards`](https://github.com/rstudio/shinydashboard) to build your first interactive dashboard.
