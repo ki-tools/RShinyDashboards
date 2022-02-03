@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>My Awesome Presentation</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <style type="text/css">
+      @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+      @import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);
+      @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+      
+      body { font-family: 'Droid Serif'; }
+      h1 {
+        font-family: 'Yanone Kaffeesatz';
+        font-weight: normal;
+        color:darkslategrey;
+      }
+      h2, h3 {
+        font-family: 'Yanone Kaffeesatz';
+        font-weight: normal;
+      }
+      .my-one-page-font {
+        font-size: 30px;
+      }     
+      .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+            /* Two-column layout */
+      .left-column {
+        color: #777;
+        width: 30%;
+        float: left;
+      }
+        .left-column h2:last-of-type, .left-column h3:last-child {
+          color: #000;
+        }
+      .right-column {
+        width: 70%;
+        float: right;
+        padding-top: 1em;
+      }
+      .inverse {
+        background: #272822;
+        color: #e4e4e1;
+        text-shadow: 0 0 20px #333;
+      }
+      .inverse h1, .inverse h2, .inverse h3 {
+        color: #f3f3f3;
+        line-height: 0.8em;
+      }
+      .lightfont {color:rgb(129, 126, 126);
+    </style>
+  </head>
+  <body>
+    <textarea id="source">
+
+class: center, middle
+
+# Your Workflow & the GitHub Platform
+
+checkout the slides branch for a pdf.
+
+???
+
+Notes for the _first_ slide!
+
+---
+
+# Agenda
+
+1. Introduction
+2. Survey of tools and needs
+3. Looking for automation
+4. Creating an accessible and secure workflow
+
+---
+
+# Introduction
+
+      It's possible to embed images.
+![](https://cdn.shopify.com/s/files/1/0051/4802/products/mona-1_large.jpg?v=1511308586)
+
+---
+
+# Survey of tools and needs
+
+---
+
+# Looking for automation
+
+---
+
+# Creating an accessible and secure workflow
+
+    </textarea>
+    <script src="https://remarkjs.com/downloads/remark-latest.min.js" type="text/javascript">
+    </script>
+    <script type="text/javascript">
+      remark.macros.upper = function () {
+        // `this` is the value in the parenthesis, or undefined if left out
+        return this.toUpperCase();
+      };
+
+      remark.macros.random = function () {
+        // params are passed as function arguments: ["one", "of", "these", "words"]
+        var i = Math.floor(Math.random() * arguments.length);
+        return arguments[i];
+      };
+      
+      remark.macros.scale = function (percentage) {
+        var url = this;
+        return '<img src="' + url + '" style="width: ' + percentage + '" />';
+      };
+      
+      var slideshow = remark.create({
+        ratio: "16:9",
+        highlightLanguage: 'javascript',
+        highlightStyle: 'monokai'
+       });
+    </script>
+  </body>
+</html>
