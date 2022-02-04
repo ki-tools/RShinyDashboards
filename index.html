@@ -18,6 +18,14 @@
         font-family: 'Yanone Kaffeesatz';
         font-weight: normal;
       }
+      blockquote {
+        font-size: 40px;
+        font-style: italic;
+        color:rgb(58, 61, 61);
+        padding: 15px 15px 10px 15px;
+        width: 90%;
+}
+
       .my-one-page-font {
         font-size: 30px;
       }     
@@ -25,14 +33,14 @@
             /* Two-column layout */
       .left-column {
         color: #777;
-        width: 30%;
+        width: 50%;
         float: left;
       }
         .left-column h2:last-of-type, .left-column h3:last-child {
           color: #000;
         }
       .right-column {
-        width: 70%;
+        width: 50%;
         float: right;
         padding-top: 1em;
       }
@@ -63,16 +71,25 @@ class: center, middle
 
 ---
 
-class: middle
+class: middle, center
 # Agenda
 
-.left[
-1. Introduction to R-Shiny and Dashboards
-2. Examples of R-Shiny
-3. Making our first R-Shiny dashboard
-4. A few rules for dashboards
-5. How do I learn more?
+
+.right-column[
+  .left[
+### 1. Introduction to R-Shiny and Dashboards
+### 2. Examples of R-Shiny
+### 3. Making our first R-Shiny dashboard
+### 4. A few rules for dashboards
+### 5. How do I learn more?
+  ]
 ]
+
+.left-column[
+![:scale 50%](img/shiny.png)  
+]
+
+
 ---
 
 class: center, middle, inverse
@@ -81,34 +98,51 @@ class: center, middle, inverse
 ---
 
 class: center, middle
-# What are dashboards?
+# :Dashboards:
 
-### Opinionated views for decision making that facilitate user input.
+## Opinionated views for decision making that facilitate user input.
+
+![:scale 85%](img/car-dashboard.png)
+
+???
+
+Focus on all the elements that could go wrong with a car and how the designers make careful decisions about what sits in front of the drivers view.
+
+Also, discuss how the dashboard metaphore is a bit complicated as the driver of the vehicle can hear and feel much more than what is before their eyes.  While a data dashboard only provides a visual sensation of the data.
 
 ---
 
 class: center, middle
 # What is R-Shiny?
 
+.left-column[
+   .left[
+</br>
+</br>
+</br>     
 ### An interactive approach for narrating data stories using R.
 
-> Shiny is an R package that makes it easy to build interactive web apps straight from R.
->    
-> [RStudio Shiny website](https://shiny.rstudio.com/)
+__Shiny is an R package that makes it easy to build interactive web apps straight from R.__
+   
+- [RStudio Shiny website](https://shiny.rstudio.com/)
+      ]
+]
+
+.right-column[
+![:scale 75%](img/rstudio.png)
+]
+
 
 ---
 
 class: center, middle
 # What are the alternatives to R-Shiny?
 
-![:scale 50%](img/comparison.png)    
+![:scale 65%](img/comparison.png)    
 
-[reference](https://www.datarevenue.com/en-blog/data-dashboarding-streamlit-vs-dash-vs-shiny-vs-voila)
+???
 
----
-
-class: center, middle
-# Dos and Don'ts for Dashboards
+Focus on Dash, Streamlit, and Shiny.  Shiny is the only R language dashboard tool on this chart.  If anyone has a Python background, we highly recommend Streamlit.
 
 
 ---
@@ -118,40 +152,69 @@ class: center, middle, inverse
 
 ---
 
+class: my-one-page-font
 # [Build your Own Hex Sticker](https://connect.thinkr.fr/hexmake/)
 
 - _The app's purpose is clear._
 - _Overwhelming inputs are hidden until they are needed._
-- _[GitHub Repo](https://github.com/ColinFay/hexmake)
+- _[GitHub Repository](https://github.com/ColinFay/hexmake)_
 
-![:scale 50%](img/hexmake.png)
-
+.center[
+![:scale 70%](img/hexmake.png)
+]
 ---
 
+class: my-one-page-font
 # [Datify: Spotify Music](https://kneijenhuijs.shinyapps.io/Datify/)
 
 - _The search input invites use._
 - _Buttons are big, clear, and organized._
 
+.center[
+![:scale 70%](img/Datify.png)
+]
+
 ---
 
+class: my-one-page-font
 # [Radiant: Interactive 'Software' for Modeling](https://vnijs.shinyapps.io/radiant/?SSUID=2a33be2809)
 
 - _Lot's of functionality through drop-down menus._
 - _General purpose application for modeling._
 - [GitHub Repo](https://github.com/radiant-rstats/radiant)
 
+.center[
+![:scale 70%](img/radiant.png)
+]
+
 ---
-
-# [RStudio Shiny Gallery](https://shiny.rstudio.com/gallery/)
-
-
----
-
-
 
 class: center, middle, inverse
 # Making our first R-Shiny dashboard
+
+
+---
+
+class: left, middle
+# Using the `shinydashboard` package
+
+### The `shinydashboard` package is a collection of functions that make it easy to create dashboards.
+### You can find the code for this example at our [RShinyDashboards Repository](https://github.com/ki-tools/RShinyDashboards)
+
+
+---
+
+class: left, middle
+# The primary elements
+
+
+
+---
+
+class: left, middle, inverse
+# Our first R Shiny Dashboard
+
+
 
 
 ---
@@ -161,16 +224,40 @@ class: center, middle, inverse
 
 ---
 
-# Understand your user
+class: center, middle
+
+![:scale 95%](img/know-user.png)
+
 
 ---
 
-# Define your production environment
+class: my-one-page-font
+# Define your production goals
+
+- How often will it be used?
+- How reliable does it need to be?
+- What is the impact if it is innacurate?
+
+.center[
+![:scale 75%](img/production-fault-chain.png)
+]
+
+???
+
+Based on [reference material from engineering-shiny.org](https://engineering-shiny.org/)
 
 ---
 
+class: my-one-page-font
 # Design with a purpose
 
+> The purpose of design is much more closely linked to strategy than aesthetics. Design is the process of intentionally creating something while simultaneously considering it’s objective, function, economics, AND aesthetics.
+
+> .right[_Kim Schaefer_]
+
+???
+
+https://medium.com/experimenting-on-purpose/5-designing-with-purpose-9ab8c1e42a13)
 
 ---
 
@@ -180,19 +267,25 @@ class: center, middle, inverse
 
 ---
 
+class: my-one-page-font
 # Online Reading Material
 
 - [Mastering Shiny](https://mastering-shiny.org/index.html)
 - [Learn Shiny](https://shiny.rstudio.com/tutorial/)
+- [Get Started w/ shinydashboard](https://rstudio.github.io/shinydashboard/get_started.html)
 - [Use shinydashboard](https://db.rstudio.com/best-practices/dashboards/#use-shinydashboard)
 - [Engineering Production-Grade Shiny Apps](https://engineering-shiny.org/index.html)
 - [shinyjs](https://deanattali.com/shinyjs/)
 - [shinydashboards](https://rstudio.github.io/shinydashboard/)
+- [Building Web Apps with R Shiny](https://debruine.github.io/shinyintro/index.html)
 - [stat545 Shiny Tutorial](https://stat545.com/shiny-tutorial.html)
+- [R markdown: The Definitive Guide - Shiny](https://bookdown.org/yihui/rmarkdown/shiny.html)
 - [YouTube: A Gentle Introduction to Creating R Shiny Webb Apps](https://www.youtube.com/watch?v=jxsKUxkiaLI)
+- [YouTube: Dynamic Dashboards with Shiny](https://www.youtube.com/watch?v=tmHh89VTanw)
 
 ---
 
+class: my-one-page-font
 # Short Courses
 
 - [Building Web Applications with Shiny in R](https://app.datacamp.com/learn/courses/building-web-applications-with-shiny-in-r)
@@ -200,6 +293,28 @@ class: center, middle, inverse
 - [Building Data Apps with R and Shiny: Essential Training](https://www.linkedin.com/learning/building-data-apps-with-r-and-shiny-essential-training/build-test-and-deploy-apps-easily-in-shiny?u=2153100)
 - [Creating Interactive Presentations with Shiny and R](https://www.linkedin.com/learning/creating-interactive-presentations-with-shiny-and-r/welcome?u=2153100)
 - [Interactive Visualization with R](https://campus.sagepub.com/interactive-visualization-with-r-for-social-scientists)
+
+---
+
+class: my-one-page-font
+# Shinyverse of R packages
+
+_There are so many packages available. This list can start your journey._
+
+- [shinydashboard](https://rstudio.github.io/shinydashboard/)
+- [shinydashboardPlus](https://shinydashboardplus.rinterface.com/)
+- [Shiny Themes](https://rstudio.github.io/shinythemes/)
+- [shinymanager](https://datastorm-open.github.io/shinymanager/)
+- [shiny.semantic](https://appsilon.github.io/shiny.semantic/)
+- [shiny.react](https://appsilon.github.io/shiny.react/)
+- [shiny.fluent](https://appsilon.github.io/shiny.fluent/)
+- [shiny sense](http://nickstrayer.me/shinysense/)
+
+---
+
+class: center, middle, inverse
+# Thanks
+
 
     </textarea>
     <script src="https://remarkjs.com/downloads/remark-latest.min.js" type="text/javascript">
