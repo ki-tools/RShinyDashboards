@@ -110,6 +110,8 @@ Focus on all the elements that could go wrong with a car and how the designers m
 
 Also, discuss how the dashboard metaphore is a bit complicated as the driver of the vehicle can hear and feel much more than what is before their eyes.  While a data dashboard only provides a visual sensation of the data.
 
+Your charts, tables, and summaries are all that the user sees of data behind the scenes.
+
 ---
 
 class: center, middle
@@ -120,9 +122,8 @@ class: center, middle
 </br>
 </br>
 </br>     
-### An interactive approach for narrating data stories using R.
+### An R package that makes it easy to build interactive web apps straight from the R language.
 
-__Shiny is an R package that makes it easy to build interactive web apps straight from R.__
    
 - [RStudio Shiny website](https://shiny.rstudio.com/)
       ]
@@ -131,7 +132,6 @@ __Shiny is an R package that makes it easy to build interactive web apps straigh
 .right-column[
 ![:scale 75%](img/rstudio.png)
 ]
-
 
 ---
 
@@ -162,6 +162,13 @@ class: my-one-page-font
 .center[
 ![:scale 70%](img/hexmake.png)
 ]
+
+???
+
+This dashboard won awards from R-Studio.  It look pretty simple and is pretty intuitive to follow.  The elements it uses within the app are pretty advanced. You can click on the `2020 RStudio Shiny Contest` to see a link that describes what elements garnered the award.
+
+> The app comes with a series of tools built on top of the magick package that allows the user to modify the image they upload to the app. It also comes with its own file format for the resulting hex and it’s plugged into a Mongo database where users can save their own hexes and share it with others. It also has a nice walk through to help users get started. [link](https://community.rstudio.com/t/hexmake-2020-shiny-contest-submission/59122)
+
 ---
 
 class: my-one-page-font
@@ -174,6 +181,10 @@ class: my-one-page-font
 .center[
 ![:scale 70%](img/Datify.png)
 ]
+
+???
+
+> We loved the clean UI of this app and the interactivity when selecting artists. The various data visualisations and the consistent use of color in them is quite striking as well! We should also note that this app won one of the Grand Prizes in the novice category with app developers having less than 1 year experience with Shiny!
 
 ---
 
@@ -188,6 +199,10 @@ class: my-one-page-font
 .center[
 ![:scale 70%](img/radiant.png)
 ]
+
+???
+
+Highlight that this is where we think Shiny can push a bit far.  You will need special requirements to push into making a full interactive 'software' within Shiny.
 
 ---
 
@@ -204,6 +219,7 @@ class: left, middle, my-one-page-font
 > - We will introduce dashboarding with Shiny using the ['shinydashboard'](https://rstudio.github.io/shinydashboard/) package.
 
 
+
 ---
 
 class: left, middle, my-one-page-font
@@ -211,6 +227,17 @@ class: left, middle, my-one-page-font
 
 ### The `shinydashboard` package is a collection of functions that make it easy to create dashboards.
 ### You can find the code for this example at our [RShinyDashboards Repository](https://github.com/ki-tools/RShinyDashboards)
+
+???
+
+> shinydashboard makes it easy to use Shiny to create dashboards
+
+It is built by RStudio.
+
+- https://rstudio.github.io/shinydashboard/
+- https://github.com/rstudio/shinydashboard
+
+
 
 ---
 
@@ -256,6 +283,12 @@ plotdata <- nyt  %>%
       date <= daterange[2])  
 ```
 
+???
+
+Highlight that we should 
+1. think about the visuals, summaries, and tables we want to leverage and why we want to display them.
+2. write the code in an R script so we see what we want in the chart and what variables we might vary.
+
 ---
 
 class: left, middle
@@ -281,17 +314,9 @@ ggplot(data = plotdata, aes(x = date, y = .data[[variable]], color = state)) +
   )
 ```
 
----
+???
 
-class: left, middle
-# Using R-Studio for app development
-
-- _Start R-Studio and create a new script `app.R` in a new `project` or `folder`. Once we have our script built we will click on `Run App`._
-
-.center[
-![:scale 50%](img/04-rstudio-interface.png)
-]
-
+This script will run as is with bost slides put into one script.
 
 ---
 
@@ -325,6 +350,28 @@ shinyApp(ui, server)
 ```
 
 Our ['app.R'](app/app.R) code for the dashboard is in the `app` folder of our [repository](https://github.com/ki-tools/RShinyDashboards)
+
+
+???
+
+Focus on how shinydashboard leverages `dashboardPage()` and the respective sections of the dashboard `dashboardHeader()`, `dashboardSidebar()`, and `dashboardBody()` which is a bit different that the base functionality of shiny. 
+
+Might have them download the `app.R` script.
+
+---
+
+class: left, middle
+# Using R-Studio for app development
+
+- _Start R-Studio and create a new script `app.R` in a new `project` or `folder`. Once we have our script built we will click on `Run App`._
+
+.center[
+![:scale 50%](img/04-rstudio-interface.png)
+]
+
+???
+
+This is the part where we could have those that want to follow along. 
 
 ---
 
@@ -363,6 +410,14 @@ server <- function(input, output) {}
 shinyApp(ui, server)
 ```
 
+???
+
+This code has a lot happening that we don't have the time to discuss in detail.  You can see links to each of the functions used at `app/readme.md`.
+
+The functions have pretty clear names that allow you to see its functionality by the name. 
+
+Some of the functions are html wrappers.
+
 ---
 
 class: left, middle
@@ -397,6 +452,10 @@ observeEvent(input$load, {
 })
 ```
 
+???
+
+Highlight the `input` and 'output' functionality. How we can assign `render__` functions as a list element and get values from our ui using the `input$` construct.
+
 ---
 
 class: left, middle
@@ -430,6 +489,16 @@ observeEvent(input$makeplot, {
 })
 ```
 
+???
+
+May want to highlight how our ggplot changes to handle the shiny paradigm.  The use of 
+
+- `.data[['input$variable']]`
+- `input#daterange[1]`
+- `plotdata()`
+- all wrapped in `renderPlot()`
+
+
 ---
 
 class: left, middle
@@ -440,8 +509,6 @@ class: left, middle
 .center[
 ![:scale 75%](img/dashboard_example.png)
 ]
-
-
 
 ---
 
@@ -477,19 +544,15 @@ Based on [reference material from engineering-shiny.org](https://engineering-shi
 class: my-one-page-font
 # Design with a purpose
 
-> The purpose of design is much more closely linked to strategy than aesthetics. Design is the process of intentionally creating something while simultaneously considering it’s objective, function, economics, AND aesthetics.
+> To design without purpose is to design without a goal, without an objective or without a target. It's just design for design’s sake. Not nearly as fulfilling as design with a direction. Without purpose, design is just decoration—aesthetics without true meaning.
 
-> .right[_Kim Schaefer_]
+> .right[_[THEIL](https://thiel.com/design-with-purpose-summary/)_]
 
-???
-
-https://medium.com/experimenting-on-purpose/5-designing-with-purpose-9ab8c1e42a13)
 
 ---
 
 class: center, middle, inverse
 # How do I learn more?
-
 
 ---
 
