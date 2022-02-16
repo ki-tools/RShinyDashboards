@@ -4,18 +4,18 @@
     <title>A Brief Introduction to R-Shiny and Dashboards</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <style type="text/css">
-      @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
-      @import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);
+      @import url(https://fonts.googleapis.com/css?family=Montserrat);
+      @import url(https://fonts.googleapis.com/css?family=Montserrat:400,600,400italic);
       @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
       
-      body { font-family: 'Droid Serif'; }
+      body { font-family: 'Montserrat'; }
       h1 {
-        font-family: 'Yanone Kaffeesatz';
-        font-weight: normal;
+        font-family: 'Montserrat';
+        font-weight: 600;
         color:darkslategrey;
       }
       h2, h3 {
-        font-family: 'Yanone Kaffeesatz';
+        font-family: 'Montserrat';
         font-weight: normal;
       }
       blockquote {
@@ -25,6 +25,15 @@
         padding: 15px 15px 10px 15px;
         width: 90%;
 }
+      .remark-slide-content h1 {
+        font-size: 45px;
+      }
+      .remark-slide-content h2 {
+        font-size: 38px;
+      }
+      .remark-slide-content h3 {
+        font-size: 30px;
+      }
 
       .my-one-page-font {
         font-size: 30px;
@@ -67,8 +76,6 @@ class: center, middle
 
 ???
 
-
-
 ---
 
 class: middle, center
@@ -78,7 +85,6 @@ class: middle, center
 .right-column[
   .left[
 ### 1. Introduction to R-Shiny and Dashboards
-### 2. Examples of R-Shiny
 ### 3. Making our first R-Shiny dashboard
 ### 4. A few rules for dashboards
 ### 5. How do I learn more?
@@ -100,15 +106,15 @@ class: center, middle, inverse
 class: center, middle
 # :Dashboards:
 
-## Opinionated views for decision making that facilitate user input.
+## Opinionated views for decision making<br> that facilitate user input
 
-![:scale 85%](img/car-dashboard.png)
+![:scale 85%](img/car-dashboard.jpg)
 
 ???
 
 Focus on all the elements that could go wrong with a car and how the designers make careful decisions about what sits in front of the drivers view.
 
-Also, discuss how the dashboard metaphore is a bit complicated as the driver of the vehicle can hear and feel much more than what is before their eyes.  While a data dashboard only provides a visual sensation of the data.
+Also, discuss how the dashboard metaphor is a bit complicated as the driver of the vehicle can hear and feel much more than what is before their eyes.  While a data dashboard only provides a visual sensation of the data.
 
 Your charts, tables, and summaries are all that the user sees of data behind the scenes.
 
@@ -133,76 +139,62 @@ class: center, middle
 ![:scale 75%](img/rstudio.png)
 ]
 
+
 ---
 
 class: center, middle
-# What are the alternatives to R-Shiny?
+# What can I build with Shiny?
+
+![:scale 65%](img/gallery.png)    
+
+https://shiny.rstudio.com/gallery/
+
+---
+
+# Why use R Shiny?
+
+### - Great for fast prototyping and fairly easy to use for someone who's not a programmer
+### - Good for dashboards or very simple apps used internally at your organization
+### - More customizable than many BI tools
+### - Easy to make use of R's stats/modeling/visualization packages
+
+---
+
+# Why not use R Shiny?
+
+### - For non-trivial apps the codebase can become very complex and hard to follow
+### - Difficult to transition a shiny app to a support team, even if they know R/Shiny
+### - Deployment requires a special server setup and hosting can be complicated or expensive
+### - In most cases, not suitable for production environments
+### - R is not a natural environment for specifying UI/UX
+### - Performance: UI interactions requiring round trips to R that could easily be handled in the web browser
+
+???
+
+I've been handed many shiny apps over the course of my consulting work, and I've never had a situation where the app was easy to jump right into and reason about. The code becomes unwieldy very fast, even when following best practices.
+
+If you have an app that you are going to spend enough time on to make it polished, and you want to make it widely available, in most cases it is more efficient to use industry standard user interface tools (JavaScript: React, Vue, etc.) and call R as necessary for calculations that must be done in R.
+
+Most of the R/Shiny apps in production that I have seen feel sluggish and are often buggy.
+
+You will find yourself pretty quickly wanting to do things with your UI that are very unnatural in Shiny and result in solutions that feel like hacks or begin to require knowledge of JavaScript. Things such as conditionally showing inputs, interactions between inputs (disable an input until another input has been selected), etc.
+
+---
+
+class: center, middle
+# What are some alternatives to R-Shiny?
 
 ![:scale 65%](img/comparison.png)    
 
 ???
 
-Focus on Dash, Streamlit, and Shiny.  Shiny is the only R language dashboard tool on this chart.  If anyone has a Python background, we highly recommend Streamlit.
+Focus on Dash, Streamlit, and Shiny.
 
+Shiny is the only R language dashboard tool on this chart.
 
----
+If anyone has a Python background, we highly recommend Streamlit.
 
-class: center, middle, inverse
-# Examples of R-Shiny
-
----
-
-class: my-one-page-font
-# [Build your Own Hex Sticker](https://connect.thinkr.fr/hexmake/)
-
-- _The app's purpose is clear._
-- _Overwhelming inputs are hidden until they are needed._
-- _[GitHub Repository](https://github.com/ColinFay/hexmake)_
-
-.center[
-![:scale 70%](img/hexmake.png)
-]
-
-???
-
-This dashboard won awards from R-Studio.  It look pretty simple and is pretty intuitive to follow.  The elements it uses within the app are pretty advanced. You can click on the `2020 RStudio Shiny Contest` to see a link that describes what elements garnered the award.
-
-> The app comes with a series of tools built on top of the magick package that allows the user to modify the image they upload to the app. It also comes with its own file format for the resulting hex and it’s plugged into a Mongo database where users can save their own hexes and share it with others. It also has a nice walk through to help users get started. [link](https://community.rstudio.com/t/hexmake-2020-shiny-contest-submission/59122)
-
----
-
-class: my-one-page-font
-# [Datify: Spotify Music](https://kneijenhuijs.shinyapps.io/Datify/)
-
-- _The search input invites use._
-- _Buttons are big, clear, and organized._
-- _Slow to refresh charts after API connection._
-
-.center[
-![:scale 70%](img/Datify.png)
-]
-
-???
-
-> We loved the clean UI of this app and the interactivity when selecting artists. The various data visualisations and the consistent use of color in them is quite striking as well! We should also note that this app won one of the Grand Prizes in the novice category with app developers having less than 1 year experience with Shiny!
-
----
-
-class: my-one-page-font
-# [Radiant: Interactive 'Software' for Modeling](https://vnijs.shinyapps.io/radiant/?SSUID=2a33be2809)
-
-- _Lot's of functionality through drop-down menus._
-- _General purpose application for modeling._
-- _Confusing entry for beginners._
-- [GitHub Repo](https://github.com/radiant-rstats/radiant)
-
-.center[
-![:scale 70%](img/radiant.png)
-]
-
-???
-
-Highlight that this is where we think Shiny can push a bit far.  You will need special requirements to push into making a full interactive 'software' within Shiny.
+If building 
 
 ---
 
@@ -214,9 +206,8 @@ class: center, middle, inverse
 class: left, middle, my-one-page-font
 # Thanks to [shinyintro](https://debruine.github.io/shinyintro/first-app.html) by [Lisa Debruine](https://github.com/debruine)
 
-> - We recommend her book for a smooth entrance into Shiny and ShinyDashboard. 
->
-> - We will introduce dashboarding with Shiny using the ['shinydashboard'](https://rstudio.github.io/shinydashboard/) package.
+- We recommend her book for a smooth entrance into Shiny and ShinyDashboard
+- We will introduce dashboarding with Shiny using the ['shinydashboard'](https://rstudio.github.io/shinydashboard/) package
 
 
 
@@ -237,8 +228,6 @@ It is built by RStudio.
 - https://rstudio.github.io/shinydashboard/
 - https://github.com/rstudio/shinydashboard
 
-
-
 ---
 
 class: left, middle
@@ -247,43 +236,77 @@ class: left, middle
 - __Our Goal:__ Give our user the opportunity to see reported COVID-19 cases for selected states over a specified time window using the [New York Times COVID-19 data](https://github.com/nytimes/covid-19-data/blob/master/us-states.csv).
 
 .center[
-![:scale 75%](img/dashboard_example.png)
+![:scale 80%](img/dashboard_example_global.png)
 ]
 
+---
+
+class: left, middle
+# Data
+
+Source: [Our World in Data](https://github.com/owid/covid-19-data)
+
+```R
+# A tibble: 161,909 × 67
+   iso_code continent location    date       total_cases new_cases new_cases_smoothed total_deaths new_deaths
+   <chr>    <chr>     <chr>       <date>           <dbl>     <dbl>              <dbl>        <dbl>      <dbl>
+ 1 AFG      Asia      Afghanistan 2020-02-24           5         5             NA               NA         NA
+ 2 AFG      Asia      Afghanistan 2020-02-25           5         0             NA               NA         NA
+ 3 AFG      Asia      Afghanistan 2020-02-26           5         0             NA               NA         NA
+ 4 AFG      Asia      Afghanistan 2020-02-27           5         0             NA               NA         NA
+ 5 AFG      Asia      Afghanistan 2020-02-28           5         0             NA               NA         NA
+ 6 AFG      Asia      Afghanistan 2020-02-29           5         0              0.714           NA         NA
+ 7 AFG      Asia      Afghanistan 2020-03-01           5         0              0.714           NA         NA
+ 8 AFG      Asia      Afghanistan 2020-03-02           5         0              0               NA         NA
+ 9 AFG      Asia      Afghanistan 2020-03-03           5         0              0               NA         NA
+10 AFG      Asia      Afghanistan 2020-03-04           5         0              0               NA         NA
+# … with 161,899 more rows, and 58 more variables: new_deaths_smoothed <dbl>, total_cases_per_million <dbl>,
+#   new_cases_per_million <dbl>, new_cases_smoothed_per_million <dbl>, total_deaths_per_million <dbl>,
+#   new_deaths_per_million <dbl>, new_deaths_smoothed_per_million <dbl>, reproduction_rate <dbl>,
+#   icu_patients <dbl>, icu_patients_per_million <dbl>, hosp_patients <dbl>, hosp_patients_per_million <dbl>,
+#   weekly_icu_admissions <dbl>, weekly_icu_admissions_per_million <dbl>, weekly_hosp_admissions <dbl>,
+#   weekly_hosp_admissions_per_million <dbl>, new_tests <dbl>, total_tests <dbl>,
+#   total_tests_per_thousand <dbl>, new_tests_per_thousand <dbl>, new_tests_smoothed <dbl>, …
+```
 
 ---
 
 class: left, middle
 # Starting with our chart (part 1)
 
-- _Before we get into Shiny code, let's write the code for our key chart in the display._
-
 ```R
-# load packages and format data for chart
+# load packages and read data for chart
 library(ggplot2)
 library(readr)
 library(dplyr)
-library(lubridate)
+library(snakecase)
 
-# Our data (updates daily)
-url <- "https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-states.csv" 
-nyt <- read_csv(url) %>%
-  mutate(cases100k = cases / 1000)
+d <- read_csv("https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/owid-covid-data.csv")
 
-  # Our potential inputs
-variable <- c("deaths", "cases1000")[2] # what is on our y axis.
-daterange <- c(ymd("2020-01-01"), ymd("2022-12-31")) # filter for x-axis
-states <- c("New York", "Texas", "Florida") # which states to plot.
+# our potential inputs
+variable <- "new_deaths_smoothed_per_million"
+locations <- c("Africa", "Asia", "Europe", "North America",
+  "Oceania", "South America")
+date_range <- as.Date(c("2020-01-01", "2022-12-31"))
 
-# Create a filtered dataset for plotting.
-plotdata <- nyt  %>%
-    filter(
-      state %in% states,
-      date >= daterange[1],
-      date <= daterange[2])  
+ggplot(data = filter(d, location %in% locations,
+  date >= date_range[1], date <= date_range[2]),
+  aes_string("date", variable, color = "location")) +
+  geom_point(size = 0.8, alpha = 0.8) +
+  geom_line() +
+  theme_bw() +
+  labs(
+    x = "Date",
+    y = to_title_case(variable),
+    color = "Location"
+  ) +
+  guides(color = guide_legend(
+    override.aes = list(lty = NA, size = 5, shape = 15)))
 ```
 
 ???
+
+Before we get into Shiny code, let's write the code for our key chart in the display.
 
 Highlight that we should 
 1. think about the visuals, summaries, and tables we want to leverage and why we want to display them.
@@ -292,39 +315,9 @@ Highlight that we should
 ---
 
 class: left, middle
-# Starting with our chart (part 2)
-
-- _The plot code to use in a general `R` script. Download the [`chart.R`](chart.R)  script from the repository._
-
-```R
-# create the plot
-# Notice the use of .data[[variable]] to select the column to place on the y-axis
-ggplot(data = plotdata, aes(x = date, y = .data[[variable]], color = state)) +
-  geom_point(size = .5, alpha = .8) +
-  geom_line() +
-  theme_bw() +
-  guides(color = guide_legend(
-    override.aes = list(lty = NA, size = 5, shape = 15))) +
-  labs(
-    title = paste0("Progression of the pandemic from ",
-      daterange[1], " to ", daterange[2]),
-    x = "Date",
-    y = ifelse(variable == "deaths", "Deaths", "Cases (1,000)"),
-    color = "State"
-  )
-```
-
-???
-
-This script will run as is with bost slides put into one script.
-
----
-
-class: left, middle
 # The Shiny app basics
 
-- _Every Shiny app has three key elements: `ui`, `server` and the `shinyApp(ui, server)
-` call. When using `shinydashboard` our `ui` is a little different._
+Every Shiny app has two key elements: `ui` and `server`. When using `shinydashboard` our `ui` is a little different.
 
 ```R
 header <- dashboardHeader(CODE FOR THE HEADER)
@@ -349,21 +342,21 @@ server <- function(input, output) {
 shinyApp(ui, server)
 ```
 
-Our ['app.R'](app/app.R) code for the dashboard is in the `app` folder of our [repository](https://github.com/ki-tools/RShinyDashboards)
+Our ['app_global.R'](app/app_global.R) code for the dashboard is in the `app` folder of our [repository](https://github.com/ki-tools/RShinyDashboards)
 
 
 ???
 
 Focus on how shinydashboard leverages `dashboardPage()` and the respective sections of the dashboard `dashboardHeader()`, `dashboardSidebar()`, and `dashboardBody()` which is a bit different that the base functionality of shiny. 
 
-Might have them download the `app.R` script.
+Might have them download the `app_global.R` script.
 
 ---
 
 class: left, middle
 # Using R-Studio for app development
 
-- _Start R-Studio and create a new script `app.R` in a new `project` or `folder`. Once we have our script built we will click on `Run App`._
+Start R-Studio and create a new script `app_global.R` in a new `project` or `folder`. Once we have our script built we will click on `Run App`.
 
 .center[
 ![:scale 50%](img/04-rstudio-interface.png)
@@ -376,37 +369,36 @@ This is the part where we could have those that want to follow along.
 ---
 
 class: left, middle
-__Building the interface:__ _Copy this code and paste it into `app.R`_
+__Building the interface:__ _Copy this code and paste it into `app_global.R`_
 
 ```R
 # Setup ----
-library(shiny); library(shinydashboard); library(readr); library(dplyr); library(ggplot2)
+library(shiny); library(shinydashboard); library(readr); library(dplyr)
+library(ggplot2); library(stringr); library(plotly); library(snakecase)
+header <- dashboardHeader(title = "COVID-19 Global Data Dashboard", titleWidth = 400)
 # Define UI ----
-header <- dashboardHeader(title = "COVID-19 NYT Data Dashboard", titleWidth = 400)
-
 sidebar <- dashboardSidebar(width = 400,
-  actionButton('load', label = "Import New York Times data"),
-  radioButtons('variable', label = "Cases or Deaths?",
-    choices = c("Number of Deaths" = "deaths", "Number of Cases" = "cases1000")),
-  selectInput("state", "Which states?",state.name, multiple = TRUE, selected = "New York" ),
-  dateRangeInput("daterange", "Date range:", start = "2020-01-01", end   = "2022-12-31"),
-  actionButton('makeplot', label = "Explore Visualization")
+  actionButton("load", label = "Import data from Our World in Data"),
+  selectInput("variable", "What variable", "(data not loaded)",
+    multiple = FALSE, selected = "(data not loaded)"),
+  selectInput("location", "Which location?", "(data not loaded)",
+    multiple = TRUE, selected = "(data not loaded)"),
+  dateRangeInput("daterange", "Date range:",
+    start = "2020-01-01", end = "2022-12-31"),
+  actionButton("makeplot", label = "Explore Visualization")
 )
-
 body <- dashboardBody(
-  box(
-    title = "Pandemic time-series (USA)", solidHeader = TRUE, width = 16, collapsible = TRUE,
-    plotOutput("timeseries", height = 500, width = 'auto')
-  ),
-  box(title = "Total reported cases (USA)", solidHeader = TRUE, width = 6,
-    div(style = "font-size:50px",textOutput("casetotal"))),
-  box(title = "Total reported deaths (USA)", solidHeader = TRUE, width = 6,
-    div(style = "font-size:50px",textOutput("deathtotal")))
+  box(title = "Pandemic time-series", solidHeader = TRUE, width = 16, collapsible = TRUE,
+    plotlyOutput("timeseries", height = 500, width = "auto")),
+  box(title = "Total reported cases (World)", solidHeader = TRUE, width = 6,
+    div(style = "font-size:50px", textOutput("casetotal"))),
+  box(title = "Total reported deaths (World)", solidHeader = TRUE, width = 6,
+    div(style = "font-size:50px", textOutput("deathtotal")))
 )
 
 # Run the application ----
 ui <- dashboardPage(skin = "purple", header, sidebar, body)
-server <- function(input, output) {}
+server <- function(input, output, session) {}
 shinyApp(ui, server)
 ```
 
@@ -421,34 +413,36 @@ Some of the functions are html wrappers.
 ---
 
 class: left, middle
-# Adding the body elements within `server` (Data & Totals).
+# Server: Add body elements (Data & Totals)
 
-- _Include these [`reactiveVal()`](https://shiny.rstudio.com/reference/shiny/1.3.0/reactiveVal.html) assignments before the `server` function._
+Include these [`reactiveVal()`](https://shiny.rstudio.com/reference/shiny/1.3.0/reactiveVal.html) assignments before the `server` function.
 
 ```R
-nyt <- reactiveVal()
-plotdata <- reactiveVal()
+covid_data <- reactiveVal()
+plot_data <- reactiveVal()
 ```
 
-- _Now include our data import event within the `server <- function(input, output) { }`._
-- _We can `Reload App` to see if the 'Import New York Times data' button works._ 
+Now include our data import event within the `server <- function(input, output, session) { }`.
 
 ```R
 # Data ingestion and total number calculations. Set to work after `input$load` occurs from clicking on Import Data.
 observeEvent(input$load, {
-  url <- "https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-states.csv"
-  fulldata <- readr::read_csv(url) %>%
-    mutate(cases100k = cases/1000)
-  
-  nyt(fulldata) # This reactive item now is composed of the NYT COVID-19 data.
-  # assigning them into the output object allows them to be called by the `ui`.
-  output$deathtotal <- renderText(
-    fulldata %>% filter(date == max(date)) %>%
-    pull(deaths) %>% sum() %>% format(big.mark = ","))
-    
-  output$casetotal <- renderText(
-    fulldata %>% filter(date == max(date)) %>%
-    pull(cases) %>% sum() %>% format(big.mark = ","))
+  url <- "https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/owid-covid-data.csv"
+  owid_data <- readr::read_csv(url)
+  covid_data(owid_data) # This reactive item now has is composed of the COVID-19 data.
+  # assigning them into the output object allows them to be called by the `ui`
+  output$deathtotal <- renderText(owid_data %>% filter(location == "World", date == max(date)) %>%
+      pull(total_deaths) %>% sum() %>% format(big.mark = ","))
+
+  output$casetotal <- renderText(owid_data %>% filter(location == "World", date == max(date)) %>%
+      pull(total_cases) %>% sum() %>% format(big.mark = ","))
+
+  # update inputs to reflect options found in the data
+  choices <- names(owid_data); names(choices) <- to_title_case(choices)
+  updateSelectInput(session, "variable", choices = choices,
+    selected = "total_cases_per_million")
+  updateSelectInput(session, "location", choices = unique(owid_data$location),
+    selected = "World")
 })
 ```
 
@@ -459,33 +453,36 @@ Highlight the `input` and 'output' functionality. How we can assign `render__` f
 ---
 
 class: left, middle
-# Adding the body elements within `server` (Chart).
+# Server: Add body elements (Chart).
 
 ```R
-
 observeEvent(input$makeplot, {
-  # notice the use of `input$` to pull the user input values into the function. 
-  # if statement stops the outputs from being created if the user hasn't clicked import
-  if (length(nyt()) != 0) {
-    newdat <- nyt() %>%
-      filter(state %in% input$state, date >= input$daterange[1], date <= input$daterange[2])
-            
-    plotdata(newdat) # This reactive item now has is composed of the filtered data.
-    # notice the use of plotdata() as the data object to signal a reactive dataset.        
-    output$timeseries <- renderPlot({
-      ggplot(data = plotdata(), aes(date, .data[[isolate(input$variable)]], color = state)) +
-      geom_point(size = .8, alpha = .8) +
-      geom_line() +
-      theme_bw() +
-      labs(
-        title = paste0("Progression of the pandemic from ",
-          input$daterange[1], " to ", input$daterange[2]),
-        x = "Date", 
-        y = ifelse(isolate(input$variable) == "deaths", "Deaths", "Cases (1,000)"),
-        color = "State") +
-      guides(color = guide_legend(override.aes = list(lty = NA, size = 5, shape = 15)))
-    })   
-  }  
+  # notice use of `input$` to pull the user input values into the function.
+  # "if" stops outputs from being created if user hasn't clicked import
+  if (length(covid_data()) != 0) {
+    newdat <- covid_data() %>%
+      filter(location %in% input$location,
+        date >= input$daterange[1],
+        date <= input$daterange[2])
+    # This reactive item now has is composed of the filtered data.
+    plot_data(newdat)
+    # notice the use of plot_data() as the data object to signal a reactive dataset.
+    output$timeseries <- renderPlotly({
+      ggplot(data = plot_data(),
+        aes_string("date", isolate(input$variable), color = "location")) +
+        geom_point(size = 0.8, alpha = 0.8) +
+        geom_line() +
+        theme_bw() +
+        labs(
+          title = paste0("Progression of the pandemic from ",
+            input$daterange[1], " to ", input$daterange[2]),
+          x = "Date",
+          y = isolate(to_title_case(input$variable)),
+          color = "Location") +
+        guides(color = guide_legend(
+          override.aes = list(lty = NA, size = 5, shape = 15)))
+    })
+  }
 })
 ```
 
@@ -498,22 +495,21 @@ May want to highlight how our ggplot changes to handle the shiny paradigm.  The 
 - `plotdata()`
 - all wrapped in `renderPlot()`
 
-
 ---
 
 class: left, middle
 # Our final dashboard
 
-- _You can see the complete script at [`app/app.R`](app/app.R)_
+You can see the complete script at [`app/app_global.R`](app/app_global.R)
 
 .center[
-![:scale 75%](img/dashboard_example.png)
+![:scale 85%](img/dashboard_example_global.png)
 ]
 
 ---
 
 class: center, middle, inverse
-# A few rules for dashboards
+# A few tips for creating dashboards
 
 ---
 

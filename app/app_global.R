@@ -1,11 +1,5 @@
 # Setup ----
-library(shiny)
-library(shinydashboard)
-library(readr)
-library(dplyr)
-library(ggplot2)
-library(stringr)
-library(plotly)
+library(shiny); library(shinydashboard); library(readr); library(dplyr); library(ggplot2); library(stringr); library(plotly); library(snakecase)
 
 # Define UI ----
 header <- dashboardHeader(
@@ -41,7 +35,6 @@ body <- dashboardBody(
   )
 )
 
-# Run the application ----
 ui <- dashboardPage(skin = "purple", header, sidebar, body)
 
 covid_data <- reactiveVal()
@@ -50,13 +43,13 @@ plot_data <- reactiveVal()
 server <- function(input, output, session) {
   observeEvent(input$load, {
     url <- "https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/owid-covid-data.csv"
-    fulldata <- readr::read_csv(url)
+    owid_data <- readr::read_csv(url)
 
     # This reactive item now has is composed of the COVID-19 data.
-    covid_data(fulldata)
+    covid_data(owid_data)
 
     output$deathtotal <- renderText(
-      fulldata %>%
+      owid_data %>%
         filter(location == "World", date == max(date)) %>%
         pull(total_deaths) %>%
         sum() %>%
@@ -64,21 +57,21 @@ server <- function(input, output, session) {
     )
 
     output$casetotal <- renderText(
-      fulldata %>%
+      owid_data %>%
         filter(location == "World", date == max(date)) %>%
         pull(total_cases) %>%
         sum() %>%
         format(big.mark = ",")
     )
 
-    choices <- names(fulldata)
-    names(choices) <- snakecase::to_title_case(choices)
+    choices <- names(owid_data)
+    names(choices) <- to_title_case(choices)
     updateSelectInput(session, "variable",
       choices = choices,
       selected = "total_cases_per_million"
     )
     updateSelectInput(session, "location",
-      choices = unique(fulldata$location),
+      choices = unique(owid_data$location),
       selected = "World"
     )
   })
@@ -97,7 +90,7 @@ server <- function(input, output, session) {
       # notice the use of plot_data() as the data object to signal a reactive dataset.
       output$timeseries <- renderPlotly({
         ggplot(data = plot_data(),
-          aes(date, .data[[isolate(input$variable)]], color = location)) +
+          aes_string("date", isolate(input$variable), color = "location")) +
           geom_point(size = 0.8, alpha = 0.8) +
           geom_line() +
           theme_bw() +
