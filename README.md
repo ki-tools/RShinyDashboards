@@ -4,7 +4,7 @@ You can find a few resources to help you get started with R Shiny here.
 
 - [HTML Slides](https://ki-tools.github.io/RShinyDashboards/)
 - [PDF Slides](https://github.com/ki-tools/RShinyDashboards/blob/slides/slides.pdf)
-- [Example Shiny App](app/)
+- [Example Shiny Apps](app/)
 
 ## Notes on Remark Slides
 
