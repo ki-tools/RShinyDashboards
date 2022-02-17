@@ -2,18 +2,18 @@ A simple example of [`shiny`](https://github.com/rstudio/shiny) and [`shinydashb
 
 ## Our Goal
 
-> Give our user the opportunity to see reported COVID-19 cases for selected states over a specified time window using the [New York Times COVID-19 data](https://github.com/nytimes/covid-19-data/blob/master/us-states.csv).
+> Give our user the opportunity to see various daily COVID-19 metrics for selected locations over a specified time window using a dataset from [Our World in Data](https://github.com/owid/covid-19-data).
 
 ## Our Data
 
-The New York times [updates this data almost daily](https://github.com/nytimes/covid-19-data/commits/master/us-states.csv). Here is the url to the latest `.csv` file - 
-https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-states.csv.
+[Our World in Data](https://ourworldindata.org/) updates [this data multiple times a day](https://github.com/owid/covid-19-data/blob/master/public/data/owid-covid-data.csv). Here is the url to the latest `.csv` file - 
+https://github.com/owid/covid-19-data/raw/master/public/data/owid-covid-data.csv.
 
 ## Our App
 
-See [app.R](app.R) for the script. For some details on the script see [A Brief Introduction to R-Shiny and Dashboards](https://ki-tools.github.io/RShinyDashboards/). We recommend [shinyintro](https://debruine.github.io/shinyintro/index.html) to get a little more comfortable with Shiny.
+See [app_global.R](app_global.R) for the script. For some details on the script see [A Brief Introduction to R-Shiny and Dashboards](https://ki-tools.github.io/RShinyDashboards/). We recommend [shinyintro](https://debruine.github.io/shinyintro/index.html) to get a little more comfortable with Shiny.
 
-![](../img/dashboard_example.png)
+![](../img/dashboard_example_global.png)
 
 ## Elements used
 
@@ -45,3 +45,20 @@ We used quite a few elements that our slides didn't cover.  Each `shiny` and `sh
 - [div()](https://shiny.rstudio.com/reference/shiny/1.6.0/builder.html)
 
 - [shinyApp()](https://shiny.rstudio.com/reference/shiny/1.6.0/shinyApp.html)
+
+## New York Times US COVID-19 Example
+
+### Our Goal
+
+> Give our user the opportunity to see reported COVID-19 cases for selected states over a specified time window using the [New York Times COVID-19 data](https://github.com/nytimes/covid-19-data/blob/master/us-states.csv).
+
+### Our Data
+
+The New York times [updates this data almost daily](https://github.com/nytimes/covid-19-data/commits/master/us-states.csv). Here is the url to the latest `.csv` file - 
+https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-states.csv.
+
+### Our App
+
+See [app.R](app.R) for the script. For some details on the script see [A Brief Introduction to R-Shiny and Dashboards](https://ki-tools.github.io/RShinyDashboards/). We recommend [shinyintro](https://debruine.github.io/shinyintro/index.html) to get a little more comfortable with Shiny.
+
+![](../img/dashboard_example.png)

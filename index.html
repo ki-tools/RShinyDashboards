@@ -234,7 +234,7 @@ class: left, middle, my-one-page-font
 # Thanks to [shinyintro](https://debruine.github.io/shinyintro/first-app.html) by [Lisa Debruine](https://github.com/debruine)
 
 - We recommend her book for a smooth entrance into Shiny
-- For our app we will use the ['shinydashboard'](https://rstudio.github.io/shinydashboard/) package
+- For our app we will use RStudio's ['shinydashboard'](https://rstudio.github.io/shinydashboard/) package
 
 ???
 
@@ -583,7 +583,7 @@ class: left, middle
 - ### `observeEvent(input$makeplot, { ... })`: responds to the input "Explore visualization" button -- executing the code in `{...}` whenever the load button is clicked
 - ### `plot_data(newdat)`: sets the `covid_data` reactive value with OWID data filtered to the currently-specified location(s) and date range
 - ### `output$timeseries <- renderPlotly(...)`: updates the plot output based on this data
-- ### `isolate(...)`: this keeps the plot from updating whenever inputs are changed (so that plot only updates when but "Explore visualization" is clicked)
+- ### `isolate(...)`: this keeps the plot from updating whenever inputs are changed (so that plot only updates when "Explore visualization" is clicked)
 
 ---
 
