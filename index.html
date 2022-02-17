@@ -84,10 +84,10 @@ class: middle, center
 
 .right-column[
   .left[
-### 1. Introduction to R-Shiny and Dashboards
-### 3. Making our first R-Shiny dashboard
-### 4. A few rules for dashboards
-### 5. How do I learn more?
+1. ### Introduction to R-Shiny and Dashboards
+3. ### Making our first R-Shiny dashboard
+4. ### A few rules for dashboards
+5. ### How do I learn more?
   ]
 ]
 
@@ -106,15 +106,22 @@ class: center, middle, inverse
 class: center, middle
 # :Dashboards:
 
-## Opinionated views for decision making<br> that facilitate user input
+## Opinionated views for decision making and insight
 
-![:scale 85%](img/car-dashboard.jpg)
+![:scale 45%](img/car-dashboard.jpg)
+![:scale 45%](img/dashboard_dashboard.png)
 
 ???
 
-Focus on all the elements that could go wrong with a car and how the designers make careful decisions about what sits in front of the drivers view.
+Focus on dashboards because this is usually the type of thing Shiny is most useful for.
 
-Also, discuss how the dashboard metaphor is a bit complicated as the driver of the vehicle can hear and feel much more than what is before their eyes.  While a data dashboard only provides a visual sensation of the data.
+A dashboard typically displays summaries or subsets of data in a targeted way that provides users with understanding and insight.
+
+Think of a car dashboard - it shows you a lot of the important information you need in a clear and concise way.
+
+The designers make careful decisions about what sits in front of the drivers view.
+
+The dashboard metaphor is a bit complicated as the driver of the vehicle can hear and feel much more than what is before their eyes.  While a data dashboard only provides a visual sensation of the data.
 
 Your charts, tables, and summaries are all that the user sees of data behind the scenes.
 
@@ -131,7 +138,7 @@ class: center, middle
 ### An R package that makes it easy to build interactive web apps straight from the R language.
 
    
-- [RStudio Shiny website](https://shiny.rstudio.com/)
+### [RStudio Shiny website](https://shiny.rstudio.com/)
       ]
 ]
 
@@ -139,6 +146,11 @@ class: center, middle
 ![:scale 75%](img/rstudio.png)
 ]
 
+???
+
+Due to the short time that we have, this will be a very fast overview and introduction to Shiny.
+
+We won't be able to go into a lot of detail but will point to many resources along the way.
 
 ---
 
@@ -149,25 +161,34 @@ class: center, middle
 
 https://shiny.rstudio.com/gallery/
 
+???
+
+There are many examples out there but I would recommend looking at this gallery for examples of what you can do and for inspiration.
+
 ---
 
 # Why use R Shiny?
 
-### - Great for fast prototyping and fairly easy to use for someone who's not a programmer
-### - Good for dashboards or very simple apps used internally at your organization
-### - More customizable than many BI tools
-### - Easy to make use of R's stats/modeling/visualization packages
+- ### Great for fast prototyping
+- ### Only need to know R (usually*)
+- ### Easy to make use of R's stats/modeling/visualization packages
+- ### Good for dashboards or very simple apps used internally at your organization
+- ### More customizable than many BI tools
+
+???
+
+As soon as you want to change the look of your site or add more custom or dynamic interactions, it becomes useful to know some HTML, CSS, JavaScript.
 
 ---
 
 # Why not use R Shiny?
 
-### - For non-trivial apps the codebase can become very complex and hard to follow
-### - Difficult to transition a shiny app to a support team, even if they know R/Shiny
-### - Deployment requires a special server setup and hosting can be complicated or expensive
-### - In most cases, not suitable for production environments
-### - R is not a natural environment for specifying UI/UX
-### - Performance: UI interactions requiring round trips to R that could easily be handled in the web browser
+- ### For non-trivial apps the codebase can become very complex and hard to follow
+- ### Difficult to transition a shiny app to a support team, even if they know R/Shiny
+- ### Deployment requires a special server setup and hosting can be complicated or expensive
+- ### In most cases, not suitable for production environments
+- ### R is not a natural environment for specifying UI/UX
+- ### Performance: UI interactions requiring round trips to R that could easily be handled in the web browser
 
 ???
 
@@ -178,6 +199,8 @@ If you have an app that you are going to spend enough time on to make it polishe
 Most of the R/Shiny apps in production that I have seen feel sluggish and are often buggy.
 
 You will find yourself pretty quickly wanting to do things with your UI that are very unnatural in Shiny and result in solutions that feel like hacks or begin to require knowledge of JavaScript. Things such as conditionally showing inputs, interactions between inputs (disable an input until another input has been selected), etc.
+
+Sometimes it's good to consider alternatives -- R Markdown, etc.
 
 ---
 
@@ -201,13 +224,19 @@ If building
 class: center, middle, inverse
 # Making our first R-Shiny dashboard
 
+???
+
+We'll learn by example. We will of course not be able to go into detail about everything, but we should be able to give you a feel for what a working app can look like which can act as a basis for you to explore your own use cases.
+
 ---
 
 class: left, middle, my-one-page-font
 # Thanks to [shinyintro](https://debruine.github.io/shinyintro/first-app.html) by [Lisa Debruine](https://github.com/debruine)
 
-- We recommend her book for a smooth entrance into Shiny and ShinyDashboard
-- We will introduce dashboarding with Shiny using the ['shinydashboard'](https://rstudio.github.io/shinydashboard/) package
+- We recommend her book for a smooth entrance into Shiny
+- For our app we will use the ['shinydashboard'](https://rstudio.github.io/shinydashboard/) package
+
+???
 
 
 
@@ -216,12 +245,12 @@ class: left, middle, my-one-page-font
 class: left, middle, my-one-page-font
 # Using the `shinydashboard` package
 
-### The `shinydashboard` package is a collection of functions that make it easy to create dashboards.
+### The [`shinydashboard`](https://rstudio.github.io/shinydashboard/) package is a collection of functions that make it easy to create dashboards.
 ### You can find the code for this example at our [RShinyDashboards Repository](https://github.com/ki-tools/RShinyDashboards)
 
 ???
 
-> shinydashboard makes it easy to use Shiny to create dashboards
+shinydashboard makes it easy to use Shiny to create dashboards
 
 It is built by RStudio.
 
@@ -233,7 +262,7 @@ It is built by RStudio.
 class: left, middle
 # Our first R Shiny Dashboard
 
-- __Our Goal:__ Give our user the opportunity to see reported COVID-19 cases for selected states over a specified time window using the [New York Times COVID-19 data](https://github.com/nytimes/covid-19-data/blob/master/us-states.csv).
+__Our Design Goal:__ Give our user the opportunity to see various daily COVID-19 metrics for selected locations over a specified time window using a dataset from [Our World in Data](https://github.com/owid/covid-19-data).
 
 .center[
 ![:scale 80%](img/dashboard_example_global.png)
@@ -317,12 +346,12 @@ Highlight that we should
 class: left, middle
 # The Shiny app basics
 
-Every Shiny app has two key elements: `ui` and `server`. When using `shinydashboard` our `ui` is a little different.
+Every Shiny app has two key elements: `ui` and `server`. When using `shinydashboard` the layout of our `ui` is handled for us and we just need to stick the appropriate controls and outputs in the right place.
 
 ```R
-header <- dashboardHeader(CODE FOR THE HEADER)
+header <- dashboardHeader(CODE FOR THE HEADER UI)
 sidebar <- dashboardSidebar(CODE FOR THE INPUTS)
-body <- dashboardBody(CODE FOR THE RESULTS)
+body <- dashboardBody(CODE FOR THE RESULTS OUTPUTS)
 
 ui <- dashboardPage(
   skin = 'purple',
@@ -342,7 +371,7 @@ server <- function(input, output) {
 shinyApp(ui, server)
 ```
 
-Our ['app_global.R'](app/app_global.R) code for the dashboard is in the `app` folder of our [repository](https://github.com/ki-tools/RShinyDashboards)
+The ['app_global.R'](app/app_global.R) code for our dashboard is in the `app` folder of our [repository](https://github.com/ki-tools/RShinyDashboards)
 
 
 ???
@@ -364,12 +393,12 @@ Start R-Studio and create a new script `app_global.R` in a new `project` or `fol
 
 ???
 
-This is the part where we could have those that want to follow along. 
+At this point, if you would like to test out the entire app, you can copy and paste the code from ['app_global.R'](app/app_global.R) into RStudio and click "Run App".
 
 ---
 
 class: left, middle
-__Building the interface:__ _Copy this code and paste it into `app_global.R`_
+__Building the interface incrementally:__ _Copy this code and paste it into `app_global.R`_
 
 ```R
 # Setup ----
@@ -404,6 +433,8 @@ shinyApp(ui, server)
 
 ???
 
+However, for the purpose of this workshop we are going to build the app sequentially. We already created the plot. Now we need to build the UI and figure out how to plug the plot and its inputs in.
+
 This code has a lot happening that we don't have the time to discuss in detail.  You can see links to each of the functions used at `app/readme.md`.
 
 The functions have pretty clear names that allow you to see its functionality by the name. 
@@ -413,16 +444,53 @@ Some of the functions are html wrappers.
 ---
 
 class: left, middle
-# Server: Add body elements (Data & Totals)
+# Inputs
 
-Include these [`reactiveVal()`](https://shiny.rstudio.com/reference/shiny/1.3.0/reactiveVal.html) assignments before the `server` function.
+- ### `actionButton("load", ...)`: a button that will load the data
+- ### `selectInput("variable", ...)`: a dropdown menu listing all of the variables that can be plotted
+- ### `selectInput("location", ...)`: a dropdown menu listing all of the geographic locations we can plot data for
+- ### `dateRangeInput("daterange", ...)`: a date range picker
+- ### `actionButton("makeplot", ...)`: a button that when pressed will create the visualization for the specified paramters
+
+### These are all __inputs__. Their values will be made available in the app server as `input$load`, `input$variable`, etc.
+
+---
+
+class: left, middle
+# Outputs
+
+- ### `box()`: a UI element in the shinydashboard package that designates a content area in the dashboard
+- ### `plotlyOutput("timeseries", ...)`: specifies where the time series visualization will be placed
+- ### `textOutput("casetotal")`: specifies where the case total for the specified location(s) will go
+- ### `textOutput("deathtotal")`: specifies where the death total for the specified location(s) will go
+
+### These are all __outputs__. Their values will be made available in the app server as `output$timeseries`, `output$casetotal`, `output$deathtotal`.
+
+
+---
+
+class: left, middle
+# Server: Add body elements
+
+### Include these [`reactiveVal()`](https://shiny.rstudio.com/reference/shiny/1.3.0/reactiveVal.html) assignments before the `server` function.
 
 ```R
 covid_data <- reactiveVal()
 plot_data <- reactiveVal()
 ```
 
-Now include our data import event within the `server <- function(input, output, session) { }`.
+### A "reactive value" is a special object in Shiny that causes other elements of the application to update, or "react" when the variable is initialized or changed.
+
+### A reactive value can be __set__ by calling it with an argument, e.g. `covid_data(my_data_frame)`
+
+### A reactive value is __accessed__ by calling it with no arguments, e.g. `covid_data()`
+
+---
+
+class: left, middle
+# Server: Add body elements (Data & Totals)
+
+### Now include our data import event within the<br> `server <- function(input, output, session) { SERVER CONTENTS }`.
 
 ```R
 # Data ingestion and total number calculations. Set to work after `input$load` occurs from clicking on Import Data.
@@ -449,6 +517,17 @@ observeEvent(input$load, {
 ???
 
 Highlight the `input` and 'output' functionality. How we can assign `render__` functions as a list element and get values from our ui using the `input$` construct.
+
+---
+
+class: left, middle
+# Server components
+
+- ### `observeEvent(input$load, { ... })`: responds to the input "load" button -- in this case it executes the code in `{...}` whenever the load button is clicked
+
+- ### `covid_data(owid_data)`: sets the `covid_data` reactive value with OWID data
+- ### `output$deathtotal`: sets the "deathtotal" output to the  default ("World") location's death total
+- ### `updateSelectInput(...)`: updates the options available in the dropdown menus now that the data has been loaded
 
 ---
 
@@ -498,6 +577,17 @@ May want to highlight how our ggplot changes to handle the shiny paradigm.  The 
 ---
 
 class: left, middle
+# Server components
+
+- ### Our previous ggplot code is now wired to handle the inputs
+- ### `observeEvent(input$makeplot, { ... })`: responds to the input "Explore visualization" button -- executing the code in `{...}` whenever the load button is clicked
+- ### `plot_data(newdat)`: sets the `covid_data` reactive value with OWID data filtered to the currently-specified location(s) and date range
+- ### `output$timeseries <- renderPlotly(...)`: updates the plot output based on this data
+- ### `isolate(...)`: this keeps the plot from updating whenever inputs are changed (so that plot only updates when but "Explore visualization" is clicked)
+
+---
+
+class: left, middle
 # Our final dashboard
 
 You can see the complete script at [`app/app_global.R`](app/app_global.R)
@@ -507,6 +597,25 @@ You can see the complete script at [`app/app_global.R`](app/app_global.R)
 ]
 
 ---
+
+class: left, middle
+# Additional features
+
+### These are features that would be nice to add to the app:
+
+- ### Automatically load the data
+- ### Provide a progress indicator for the data download
+- ### Only allow up to 10 locations to be chosen at a time
+- ### When a user input is changed, gray out the plot and text output areas until "explore visualization" is pressed again
+- ### Don't allow the "to" date to be earlier than the "from" Date
+- ### etc.
+
+???
+
+Some of these can be done with a little work. Many can be done with a lot of work and probably some JavaScript.
+
+---
+
 
 class: center, middle, inverse
 # A few tips for creating dashboards
